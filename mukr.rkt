@@ -35,6 +35,11 @@
       [else (and (eqv? u v) s)]
       )))
 
+(define (== u v)
+  (lambda (s/c)
+    (let* ([s (unify u v (car s/c))])
+      (if s (unit `(,s . ,(cdr s/c))) mzero))))
+
 ; combining streams (can be empty, immature, or matured)
 (define (mplus s1 s2)
   (cond
